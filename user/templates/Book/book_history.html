@@ -1,0 +1,89 @@
+{% extends 'user/navbar.html' %}
+
+{% block content %}
+<div class="breadcrumb-area pt-35 pb-35 bg-gray-3">
+    <div class="container">
+        <div class="breadcrumb-content text-center">
+            <ul>
+                <li class="active"><h2>your booking history</h2></li>
+            </ul>
+        </div>
+    </div>
+</div>
+<div class="cart-main-area pt-90 pb-100">
+    <div class="container">
+        <h3 class="cart-page-title">Your booking items</h3>
+        <div class="row">
+        
+        {% if booking_list %}
+        <div class=" col-md-15 col-sm-15 col-15">
+            <form action="#">
+                <div class="table-content table-responsive cart-table-content ">
+                   
+                  <table>
+                    <thead>
+                        <tr>
+                            <th style="font-weight: bold;">Name</th>
+                            <th style="font-weight: bold;">Address</th>
+                            <th style="font-weight: bold;">PhoneNumber</th>
+                            <th style="font-weight: bold;">District</th>
+                            <th style="font-weight: bold;">Date / Time</th>
+                            <th style="font-weight: bold;">collection Status</th>
+
+                        </tr>
+                    </thead>
+                    <tbody>
+
+                        
+                        {% for l in booking_list  %}
+                        <tr>
+                            <td class="product-name">{{l.user.first_name}}{{l.user.second_name}}</td>
+                            <td class="product-name">
+                             {{l.address.house_name}} <br>
+                             {{l.address.address_line_1}}<br>
+                             {{l.address.address_line_2}}<br>
+                             {{l.address.pin}}
+                             </td>
+                             <td class="product-name">{{l.address.phone_number}}</td>
+                             <td class="product-name">{{l.address.district}}</td>
+                             <td class="product-name">{{l.address.created_on}}</td>
+                            {% if l.has_completed %}
+                            <td><div class="badge badge-success">collected</div></td>
+                            {%else%}
+                            <td><div class="badge badge-warning">pending...</div></td>
+                            {% endif %}                                               
+                        </tr>
+                        {% endfor %}
+                            
+
+                    </tbody>
+                   </table>
+                </div>
+                </form>
+        </div>
+        {% else %}
+          <div class="alert alert-info col-sm-11 ml-5" role="alert">
+              <p class="text-center">
+                <strong>Empty!</strong>
+              </p>
+          </div>
+        {% endif %}
+            
+        </div>
+    </div>
+</div>
+<style>
+    .badge{
+        width: 120px;
+        padding: 19px;
+        border-radius: 55px;
+        font-size: 15px;
+    }
+    th{
+        font-weight: bold;
+    }
+</style>
+{% endblock content %}
+    
+
+    

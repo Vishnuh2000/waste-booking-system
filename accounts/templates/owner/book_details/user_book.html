@@ -1,0 +1,90 @@
+{% extends 'owner/home/navbar.html' %}
+{% block content %}
+<div class="breadcrumb-area pt-35 pb-35 bg-gray-3">
+    <div class="container">
+        <div class="breadcrumb-content text-center">
+            <ul>
+                <li class="active"><h2>user booking section</h2></li>
+            </ul>
+        </div>
+    </div>
+</div>
+<div class="cart-main-area pt-90 pb-100">
+    <div class="container">
+        <h3 class="cart-page-title">Your  items</h3>
+        <div class="row">   
+           {% if booking_details %}
+           <div class=" col-md-15 col-sm-15 col-15">
+            <form action="#">
+                <div class="table-content table-responsive cart-table-content ">             
+                  <table>
+                    <thead>
+                        <tr>
+                            <th>Id</th>
+                            <th>user name</th>
+                            <th>Address</th>
+                            <th>phone number</th>
+                            <th>collection Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+
+                        
+                        {% for l in booking_details %}
+                        <tr>
+                            <td>{{l.id}}</td>
+                            <td class="product-name">{{l.user.first_name}} {{l.user.last_name}}</td>
+                             <td>
+                             {{l.addreshouse_name}}
+                             {{l.address.address_line_1}}
+                             {{l.address.address_line_2}}
+                             {{l.address.pin}}
+                             {{l.address.district}}
+                             <td class="product-name">{{l.address.phone_number}}</td>
+                            
+                            </td>   
+                            {% if l.has_completed == 'Collect' %}
+                            <td>
+                               <div class="badge badge-success">Collected</div>           
+                            </td>
+                            <td></td>
+                             {% else %}
+                            <td>
+                                <div class="badge badge-warning">Pending...</div>
+                            </td>
+                            
+                            {% endif %}
+                        </tr>
+                        {% endfor %}
+                            
+
+                    </tbody>
+                   </table>                   
+                  </div>
+                  </form>
+                 </div>
+                {% else %}
+                 <div class="alert alert-info col-sm-10 offset-1" role="alert">
+                    <p class="text-center">
+                        <strong>Empty!</strong>
+                    </p>
+                 </div>
+               {% endif %}
+               
+        </div>
+    </div>
+</div>
+<style>
+    
+    .badge{
+        
+        width: 100px;
+        padding: 15px;
+        font-size: 14px;
+    }
+    
+</style>
+{% endblock content %}
+    
+
+    

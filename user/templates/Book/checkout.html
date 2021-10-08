@@ -1,0 +1,135 @@
+{% extends 'user/navbar.html' %}
+
+{% block content %}
+<div class="breadcrumb-area pt-35 pb-35 bg-gray-3">
+    <div class="container">
+        <div class="breadcrumb-content text-center">
+            <h1>Booking Section</h1>
+        </div>
+    </div>
+</div>
+<form action="" method="POST">
+
+<div class="checkout-area pt-95 pb-100 offset-3">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8">
+                <div class="billing-info-wrap">
+                    <h3>Booking Details</h3>
+                    <div class="row">
+                        <div class="col-lg-6 col-md-6">
+                            <div class="billing-info mb-20">
+                                <label>First Name</label><br>
+                                <h3><b>{{ user.first_name }}</b></h3>
+                            </div>
+                        </div>
+                        <div class="col-lg-6 col-md-6">
+                            <div class="billing-info mb-20">
+                                <label>Last Name</label><br>
+                                <h3><b>{{ user.last_name }}</b></h3>
+                            </div>
+                        </div>
+                        <div class="col-lg-6 col-md-6">
+                            <div class="billing-info mb-100">
+                                <label>Email Address</label><br>
+                                <h3><b>{{ user.email }}</b></h3>
+                            </div>
+                        </div>
+                        <div class="col-lg-5 col-md-6">
+                            <div class="billing-info mb-100">
+                                <label>State</label>
+                                <h3><b>KERALA</b></h3>
+                            </div>
+                        </div>
+        
+                        
+                        
+                        <div class="col-lg-12 mb-5">
+                            <div class="billing-info mb-20">
+                                <label><h3>Select Delivery Address</h3></label>
+                                {% if address_list %}
+                                <select name="address" id="address">
+                                  {% for i in address_list  %}
+                                    <option value="{{ i.id }}">{{i.address_type}}</option>
+                                  {% endfor %}                    
+                               </select>
+                    
+                            </div>
+                        </div>
+                        <div class="col-lg-12 mb-5">
+                            <div class="billing-info mb-20">
+                                <label><h4><b>Address</b></h2></label>
+                                <div id="address_data"></div> <br> 
+                                {% csrf_token %}
+                                <button type="submit" class="btn btn-info btn-block badge-pill" style="padding:2%;">
+                                    Book
+                                </button>       
+                            {% else %}
+                            <div class="alert-info">
+                                <p class="text-center">Please update an Address in My Accounts <br>
+                                    
+                                    <button class="btn2" type="submit">
+                                        <a href="{% url 'address_create' %}" class="text-light">+ New Address</a>
+                                    </button>
+                                </p>
+                            </div> 
+                            
+                            {% endif %}
+                            </div>
+                        </div>
+                            
+                        
+                    </div>
+                    
+                   
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+</form>
+<style>
+    .panel-title{
+        display: inline;
+    }
+    .btn2 {
+    
+    background-color: #34466d; 
+    border: none;
+    color: white;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 20px;
+    margin: 4px 2px;
+    cursor: pointer;
+    border-radius:12px;
+    }
+</style>
+<script>
+ function setAddressData(){
+        var id = document.getElementById('address').value;
+        var http = new XMLHttpRequest();
+        http.onreadystatechange = function(){
+            if (this.readyState == 4 && this.status == 200){
+                var address = JSON.parse(this.responseText).address;
+                var target = document.getElementById('address_data');
+                target.innerHTML = `
+                <p><b> House Name : </b>${address.house_name}</p>
+                <p><b> Address : </b>${address.address_line_1}</p>
+                <p><b> Landmark : </b>${address.address_line_2}</p>
+                <p><b> Pincode : </b>${address.pin}</p>
+                <p><b> Phone Number : </b>${address.phone_number}</p>
+                `;
+            }
+        }
+        http.open('GET', `{{ request.hostname }}/api/get-address/${id}/`);
+        http.send();
+    }
+    setAddressData();
+    document.getElementById('address').addEventListener('change', function(e){
+        setAddressData();
+    });
+</script>
+{% endblock content %}

@@ -1,0 +1,60 @@
+{% extends 'owner/home/navbar.html' %}
+{% block content %}
+<div class="breadcrumb-area pt-35 pb-35 bg-gray-3">
+    <div class="container">
+        <div class="breadcrumb-content text-center">
+            <ul>
+                <li class="active" style="font-weight: bold;">Staff Dashbord</li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+
+<div class="checkout-area pb-80 pt-100">
+    <div class="container">
+        <div class="row">
+            <div class="ml-auto mr-auto col-lg-9">
+                <div class="checkout-wrapper">
+                    <div id="faq" class="panel-group">
+                        <div class="panel panel-default single-my-account">
+                            <div class="panel-heading my-account-title">
+                                <h3 class="panel-title"><span>1 .</span> <a href="{% url 'user_booking_staff_list' %}" >User Booking Request</a></h3>
+                            </div>
+                           
+                        </div>
+                        <div class="panel panel-default single-my-account">
+                            <div class="panel-heading my-account-title">
+                                <h3 class="panel-title"><span>2 .</span> <a  href="">user</a></h3>
+                            </div>
+                            
+                        </div>
+                        <div class="panel panel-default single-my-account">
+                            <div class="panel-heading my-account-title">
+                                <h3 class="panel-title"><span>3 .</span> <a data-toggle="collapse" data-parent="#faq" href="#my-account-3" class="collapsed" aria-expanded="false">Modify your address book entries   </a></h3>
+                            </div>
+                           
+                        </div>
+                        <div class="panel panel-default single-my-account">
+                            <div class="panel-heading my-account-title">
+                                <h3 class="panel-title"><span>4 .</span> <a href="wishlist.html">Modify your wish list   </a></h3>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<style>
+    .panel-title{
+       
+    font-weight: bold;
+
+    }
+    a{
+       font-weight: bold;
+    }
+</style>
+{% endblock content %}
+    

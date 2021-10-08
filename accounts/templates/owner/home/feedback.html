@@ -1,0 +1,65 @@
+{% extends 'owner/home/navbar.html' %}
+{% block content %}
+<div class="breadcrumb-area pt-35 pb-35 bg-gray-3">
+    <div class="container">
+        <div class="breadcrumb-content text-center">
+            <ul>
+                <li class="active"><h2>user feedback section</h2></li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+{% if feedback %}
+<div class="cart-main-area pt-90 pb-100">
+    <div class="container">
+         <div class="row">
+            <div>
+                <form action="#">
+                    <div class="table-content table-responsive cart-table-content">
+                       <table style="width:1200px">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Email</th>
+                                <th>Subject</th>
+                                <th>Messgae</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            
+                            {% for c in feedback %}
+                            <tr>
+                                <td>{{ c.name }}</td>
+                                <td>{{ c.email }}</td>
+                                <td>{{ c.subject }}</td>
+                                <td>{{ c.message }}</td>
+                        
+                            {% endfor %}
+                                
+                            
+                        </tbody>
+                    </table>
+                           
+                    </div>
+                </div>
+        </div>
+             
+        </div>
+</div>
+{% endif %}
+    
+<style>
+    
+    .badge{
+        
+        width: 100px;
+        padding: 15px;
+        font-size: 14px;
+    }
+    
+</style>
+{% endblock content %}
+    
+
+    

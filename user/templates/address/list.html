@@ -1,0 +1,57 @@
+<div class="panel panel-default single-my-account">
+    <div class="panel-heading my-account-title">
+        <h3 class="panel-title"><span>3 .</span> <a data-toggle="collapse" data-parent="#faq" href="#my-account-3" class="collapsed" aria-expanded="false">Modify your address book entries   </a></h3>
+    </div>
+    <div id="my-account-3" class="panel-collapse collapse">
+        <div class="panel-body">
+            <div class="myaccount-info-wrapper">
+                <div class="account-info-wrapper">
+                    <h4>Address Book Entries</h4>
+                </div>
+               
+               {% if address_list %}
+                
+                {% for a in address_list  %}
+                <div class="entries-wrapper">
+                    <div class="row">
+                        <div class="col-lg-6 col-md-6 d-flex align-items-center justify-content-center">
+                            <div class="entries-info text-center">
+                               
+                               
+                                 <p>{{a.house_name}}</p>
+                                 <p>{{a.address_line_1}}</p>
+                                 <p>{{a.address_line_2}}</p>
+                                 <p>{{a.pincode}}</p>
+                                 <p>{{a.phone_number}}</p>
+                                 <p>{{a.address_type}}</p>
+                             
+                                   
+                            </div>
+                        </div>
+                        <div class="col-lg-6 col-md-6 d-flex align-items-center justify-content-center">
+                            <div class="entries-edit-delete text-center">
+                                <a class="edit" href="{% url 'address_update' a.id %}">Edit</a>
+                                <a href="{% url 'address_delete' a.id %}" onclick="return confirm('Are You Sure')">Delete</a>
+                            </div>
+                        </div>
+                    </div>
+                   </div>
+                {% endfor %}
+                {% else %}
+                <div class="alert alert-info">
+                    <p class="text-center">Empty</p>
+                </div>
+               {% endif %}
+                   
+                <div class="billing-back-btn">
+                    <div class="billing-back">
+                        <a href="#"><i class="fa fa-arrow-up"></i> back</a>
+                    </div>
+                    <div class="billing-btn">
+                    <a href="{% url 'address_create' %}" class="btn btn-info badge-pill">+Create</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

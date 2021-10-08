@@ -1,0 +1,95 @@
+{% extends 'home/navbar.html' %}
+{% block content %}
+<div class="breadcrumb-area pt-35 pb-35 bg-gray-3">
+    <div class="container">
+        <div class="breadcrumb-content text-center">
+            <ul>
+                <li class="active">
+                    <h2>user booking section</h2>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<div class="cart-main-area pt-90 pb-100">
+    <div class="container">
+        <h3 class="cart-page-title">Your cart items</h3>
+        <form class="form-inline my-2 my-lg-0" method="GET" action="">
+            <div class="mr-sm-2">
+                {{search.form}}
+                <button class="btn btn-outline-info mt-2" type="submit">Search</button>
+            </div>
+
+        </form><br>
+
+        {% if booking %}
+        <div class="row">
+            <div class=" col-md-15 col-sm-15 col-15">
+                <form action="#">
+                    <div class="table-content table-responsive cart-table-content ">
+
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Id</th>
+                                    <th>user name</th>
+                                    <th>Address</th>
+                                    <th>phone number</th>
+                                    <th>collection Status</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+
+
+                                {% for l in booking %}
+                                <tr>
+                                    <td class="product-name">{{l.id}}</td>
+                                    <td class="product-name"> {{l.user.first_name}} {{l.user.last_name}}</td>
+                                    <td>
+                                        {{l.address.house_name}}
+                                        {{l.address.address_line_1}}
+                                        {{l.address.address_line_2}}
+                                        {{l.address.pin}}
+                                        {{l.address.district}}
+                                    <td class="product-name">{{l.address.phone_number}}</td>
+
+                                    </td>
+                                    {% if l.has_completed == 0 %}
+                                    <td>
+                                        <a class="btn btn-success badge-pill" href="{% url 'collect' id=l.id %}"
+                                            style="width: 100px;">collect</a>
+                                    </td>
+                                    {% endif %}
+
+
+                                </tr>
+                                {% endfor %}
+
+
+                            </tbody>
+                        </table>
+                    </div>
+            </div>
+            </form>
+        </div>
+        {% else %}
+                 <div class="alert alert-info col-sm-10 offset-1" role="alert">
+                    <p class="text-center">
+                        <strong>Empty!</strong>
+                    </p>
+                 </div>
+        {% endif %}
+
+    </div>
+</div>
+
+</div>
+
+
+</div>
+<style>
+
+
+</style>
+{% endblock content %}
